@@ -28,9 +28,9 @@ void print_times_table(int n)
 			{
 				printf("%d, ", product);
 			}
-			else if (j == (n == 0))
+			else if (j == n && j == 0)
 			{
-				printf("%d", product);
+				printf("%d\n", product);
 			}
 			else
 			{
