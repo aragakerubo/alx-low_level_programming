@@ -41,4 +41,10 @@ Write a function that prints the sign of a number.
   - Returns 0 and prints 0 if n is zero
   - Returns -1 and prints - if n is less than zero
 
+### 6. There is no such thing as absolute value in this world. You can only estimate what a thing is worth to you
+Write a function that computes the absolute value of an integer.
+
+  - Prototype: `int _abs(int);`
+FYI: The standard library provides a similar function: abs. Run man abs to learn more.
+
 
