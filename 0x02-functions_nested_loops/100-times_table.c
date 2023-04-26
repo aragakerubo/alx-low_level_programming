@@ -20,19 +20,22 @@ void print_times_table(int n)
 		{
 			product = i * j;
 
-			if (j == n)
+			if (j == n && j != 0)
 			{
-				printf("%3d", product);
+				printf("%3d\n", product);
 			}
-			else if(j == 0)
+			else if (j == 0 && j < n)
 			{
 				printf("%d, ", product);
+			}
+			else if (j == (n == 0))
+			{
+				printf("%d", product);
 			}
 			else
 			{
 				printf("%3d, ", product);
 			}
 		}
-		printf("\n");
 	}
 }
