@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <math.h>
 
-double fibonacci(int n);
+long fibonacci(int n);
 
 /**
  * main - Entry point
@@ -13,15 +12,16 @@ double fibonacci(int n);
 int main(void)
 {
 	int i;
-	double j, fib, sum = 0;
+	long j, fib, sum = 0;
 
 	for (i = 0; i <= 33; i++)
 	{
 		fib = fibonacci(i);
-		if ((j = fmod(fib, 2)) == 0)
+		j = fib % 2;
+		if (j == 0)
 			sum = sum + fib;
 	}
-	printf("%.0f\n", sum);
+	printf("%.0ld\n", sum);
 	return (0);
 }
 
@@ -33,7 +33,7 @@ int main(void)
  *
  * Return: Returns the n-th Fibonacci number
  */
-double fibonacci(int n)
+long fibonacci(int n)
 {
 	if (n <= 1)
 		return (n);
