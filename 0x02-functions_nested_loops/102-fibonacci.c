@@ -15,7 +15,7 @@ int main(void)
 	fibonacci = 0;
 	j = 1;
 	k = 2;
-	for (i = 1; i <= 48; i++)
+	for (i = 0; i <= 48; i++)
 	{
 		if (i == 1)
 		{
