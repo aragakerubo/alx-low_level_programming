@@ -10,7 +10,7 @@
  */
 int main(void)
 {
-	int limit = 97;
+	int limit = 96;
 
 	long double i, j, k, fib;
 
