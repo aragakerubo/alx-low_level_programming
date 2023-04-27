@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 double fibonacci(int n);
 
@@ -12,12 +13,13 @@ double fibonacci(int n);
 int main(void)
 {
 	int i;
-	double fib, sum = 0;
+	double j, fib, sum = 0;
 
 	for (i = 0; i <= 33; i++)
 	{
 		fib = fibonacci(i);
-		sum = sum + fib;
+		if ((j = fmod(fib, 2)) == 0)
+			sum = sum + fib;
 	}
 	printf("%.0f\n", sum);
 	return (0);
