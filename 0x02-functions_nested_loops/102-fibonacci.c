@@ -17,7 +17,7 @@ int main(void)
 	k = 2;
 	for (i = 0; i <= 48; i++)
 	{
-		if (i == 1)
+		if (i == 0)
 		{
 			printf("%.0f, %.0f, ", j, k);
 			continue;
