@@ -6,11 +6,11 @@
  * Description: Prints the first 50 Fibonacci numbers,
  * starting with 1 and 2, followed by a new line.
  *
- * Return: void
+ * Return: 0 (success)
  */
-void main(void)
+int main(void)
 {
-	unsigned long long int i, j, k, fibonacci;
+	double i, j, k, fibonacci;
 
 	fibonacci = 0;
 	j = 1;
@@ -19,16 +19,17 @@ void main(void)
 	{
 		if (i == 1)
 		{
-			printf("%llu, %llu, ", j, k);
+			printf("%.0f, %.0f, ", j, k);
 			continue;
 		}
 		fibonacci = j + k;
 		j = k;
 		k = fibonacci;
-		
+
 		if (i != 48)
-			printf("%llu, ", fibonacci);
+			printf("%.0f, ", fibonacci);
 		else
-			printf("%llu\n", fibonacci);
+			printf("%.0f\n", fibonacci);
 	}
+	return (0);
 }
