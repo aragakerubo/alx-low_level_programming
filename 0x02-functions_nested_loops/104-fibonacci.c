@@ -10,23 +10,39 @@
  */
 int main(void)
 {
-	int limit = 96;
+	int i;
+	unsigned long int j = 0, k = 1, fib;
+	unsigned long int j1, k1, j2, k2;
+	unsigned long int part1, part2;
 
-	long double i, j, k, fib;
-
-	j = 1;
-	k = 2;
-	printf("%.0Lf, %.0Lf, ", j, k);
-	for (i = 1; i <= limit; i++)
+	for (i = 0; i < 92; i++)
 	{
 		fib = j + k;
 		j = k;
 		k = fib;
-		if (i == limit)
-			printf("%.0Lf\n", fib);
-		else
-			printf("%.0Lf, ", fib);
+		printf("%lu, ", fib);
 	}
-
+	j1 = j / 10000000000;
+	j2 = j % 10000000000;
+	k1 = k / 10000000000;
+	k2 = k % 10000000000;
+	for (i = 93; i < 99; i++)
+	{
+		part1 = j1 + k1;
+		part2 = j2 + k2;
+		if (part2 > 9999999999)
+		{
+			part1 += 1;
+			part2 %= 10000000000;
+		}
+		printf("%lu%lu", part1, part2);
+		if (i < 98)
+			printf(", ");
+		j1 = k1;
+		j2 = k2;
+		k1 = part1;
+		k2 = part2;
+	}
+	printf("\n");
 	return (0);
 }
