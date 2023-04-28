@@ -12,4 +12,6 @@
 
 ### 5. Numbers constitute the only universal language
 
+### 6. The shortest distance between two points is a straight line
+
 
