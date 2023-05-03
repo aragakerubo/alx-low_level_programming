@@ -13,7 +13,7 @@
  */
 int _atoi(char *s)
 {
-	int i, sign, num;
+	long i, sign, num;
 
 	i = 0;
 	sign = 1;
