@@ -7,21 +7,16 @@
  *
  * Description: compares two strings
  *
- * Return: 0 if equal, -15 if s1 < s2, 15 if s1 > s2
+ * Return: Return an integer less than,
+ * equal to, or greater than zero if s1 is  found,
+ * respectively, to be less than, to match, or be greater than s2.
  */
 int _strcmp(char *s1, char *s2)
 {
-	int i = 0, j = 0, k = 0;
-
-	while (*(s1 + i) != '\0')
-		i++;
-	while (*(s2 + j) != '\0')
-		j++;
-	if (i < j)
-		k = -15;
-	else if (i > j)
-		k = 15;
-	else
-		k = 0;
-	return (k);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
