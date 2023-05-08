@@ -4,4 +4,6 @@
 
 ### 1. memcpy
 
+### 2. strchr
+
 
