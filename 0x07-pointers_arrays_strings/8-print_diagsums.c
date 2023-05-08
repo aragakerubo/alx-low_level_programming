@@ -1,11 +1,13 @@
 #include <stdio.h>
 
 /**
- * print_diagsums - prints the sum of the two diagonals of a square matrix of integers.
+ * print_diagsums - prints the sum of the two diagonals of
+ * a square matrix of integers.
  * @a: pointer to array
  * @size: size of array
  *
- * Description: prints the sum of the two diagonals of a square matrix of integers.
+ * Description: prints the sum of the two diagonals of
+ * a square matrix of integers.
  *
  * Return: void
  */
