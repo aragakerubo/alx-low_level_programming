@@ -4,4 +4,6 @@
 
 ### 1. The woman who has no imagination has no wings
 
+### 2. He who is not courageous enough to take risks will accomplish nothing in life
+
 
