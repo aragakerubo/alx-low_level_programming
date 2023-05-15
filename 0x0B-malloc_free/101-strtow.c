@@ -2,49 +2,23 @@
 #include <stdio.h>
 
 int count_words(char *str);
+int word_len(char *str);
 
 /**
- * strtow - splits a string into words
- * @str: string to split
+ * word_len - counts the length of a word
+ * @str: string to count
  *
- * Description: splits a string into words
+ * Description: counts the length of a word
  *
- * Return: pointer to an array of strings (words)
+ * Return: length of a word
  */
-char **strtow(char *str)
+int word_len(char *str)
 {
-	int i, j, k, l, m, count = 0, count2 = 0;
-	char **p;
+	int i, len = 0;
 
-	if (str == NULL || str[0] == '\0')
-		return (NULL);
-	count = count_words(str);
-	p = malloc(sizeof(char *) * (count + 1));
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (str[i] != ' ')
-		{
-			for (j = i; str[j] != ' '; j++)
-				;
-			p[count2] = malloc(sizeof(char) * (j - i + 1));
-			if (p[count2] == NULL)
-			{
-				for (k = 0; k < count2; k++)
-					free(p[k]);
-				free(p);
-				return (NULL);
-			}
-			for (l = i, m = 0; l < j; l++, m++)
-				p[count2][m] = str[l];
-			p[count2][m] = '\0';
-			count2++;
-			i = j;
-		}
-	}
-	p[count2] = NULL;
-	return (p);
+	for (i = 0; str[i] != '\0' && str[i] != ' '; i++)
+		len++;
+	return (len);
 }
 
 /**
@@ -61,8 +35,50 @@ int count_words(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[i] != ' ' && str[i + 1] == ' ')
+		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
 			count++;
 	}
 	return (count);
+}
+
+/**
+ * strtow - splits a string into words
+ * @str: string to split
+ *
+ * Description: splits a string into words
+ *
+ * Return: pointer to an array of strings (words)
+ */
+char **strtow(char *str)
+{
+	int i, j, k, l, words, len;
+	char **p;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+	words = count_words(str);
+	if (words == 0)
+		return (NULL);
+	p = malloc((words + 1) * sizeof(char *));
+	if (p == NULL)
+		return (NULL);
+	for (i = 0, j = 0; i < words; i++)
+	{
+		while (str[j] == ' ')
+			j++;
+		len = word_len(str + j);
+		p[i] = malloc((len + 1) * sizeof(char));
+		if (p[i] == NULL)
+		{
+			for (k = 0; k < i; k++)
+				free(p[k]);
+			free(p);
+			return (NULL);
+		}
+		for (l = 0; l < len; l++)
+			p[i][l] = str[j++];
+		p[i][l] = '\0';
+	}
+	p[i] = NULL;
+	return (p);
 }
