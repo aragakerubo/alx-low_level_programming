@@ -13,7 +13,7 @@
  */
 int main(int argc, char *argv[])
 {
-	int (*f)(int, int);
+	int (*func)(int, int);
 	int a, b;
 
 	if (argc != 4)
@@ -22,9 +22,9 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	f = get_op_func(argv[2]);
+	func = get_op_func(argv[2]);
 
-	if (f == NULL)
+	if (func == NULL)
 	{
 		printf("Error\n");
 		exit(99);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 
-		printf("%d\n", f(a, b));
+		printf("%d\n", func(a, b));
 
 	return (0);
 }
