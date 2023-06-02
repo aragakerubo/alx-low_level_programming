@@ -8,3 +8,5 @@
 
 ### 3. Add node at the end
 
+### 4. Free list
+
