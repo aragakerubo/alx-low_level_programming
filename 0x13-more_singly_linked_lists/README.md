@@ -14,3 +14,5 @@
 
 ### 6. Pop
 
+### 7. Get node at index
+
