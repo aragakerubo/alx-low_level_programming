@@ -6,22 +6,30 @@
  *
  * Description: The function finds the loop in a linked list
  *
- * Return: The address of the node where the loop starts, or NULL if there is no loop
+ * Return: The address of the node where the loop starts,
+ * or NULL if there is no loop
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *current = head, *next;
+	listint_t *current = head, *next = head;
 
-	if (head)
+	while (current && next && next->next)
 	{
-		while (current)
-		{
-			next = current->next;
-			if (current <= next)
-				return (current);
-			current = next;
-		}
+		current = current->next;
+		next = next->next->next;
+		if (current == next)
+			break;
 	}
 
-	return (NULL);
+	if (current != next)
+		return (NULL);
+
+	current = head;
+	while (current != next)
+	{
+		current = current->next;
+		next = next->next;
+	}
+
+	return (current);
 }
