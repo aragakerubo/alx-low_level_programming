@@ -20,3 +20,5 @@
 
 ### 9. Insert
 
+### 10. Delete at index
+
