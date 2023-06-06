@@ -15,19 +15,26 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (head)
 	{
+		next = malloc(sizeof(listint_t));
+		if (!next)
+			exit(98);
 		while (current)
 		{
-			next = current->next;
-			count++;
 			printf("[%p] %d\n", (void *)current, current->n);
+			count++;
+			next = current->next;
 			if (current <= next)
 			{
 				printf("-> [%p] %d\n", (void *)next, next->n);
 				break;
 			}
-			current = next;
+			current = current->next;
 		}
+
+		free((void *)next);
+
+		return (count);
 	}
 
-	return (count);
+	return (0);
 }
