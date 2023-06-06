@@ -13,28 +13,18 @@ size_t print_listint_safe(const listint_t *head)
 	size_t count = 0;
 	const listint_t *current = head, *next;
 
-	if (head)
+	while (current)
 	{
-		next = malloc(sizeof(listint_t));
-		if (!next)
-			exit(98);
-		while (current)
+		next = current->next;
+		count++;
+		printf("[%p] %d\n", (void *)current, current->n);
+		if (current <= next)
 		{
-			printf("[%p] %d\n", (void *)current, current->n);
-			count++;
-			next = current->next;
-			if (current <= next)
-			{
-				printf("-> [%p] %d\n", (void *)next, next->n);
-				break;
-			}
-			current = current->next;
+			printf("-> [%p] %d\n", (void *)next, next->n);
+			break;
 		}
-
-		free((void *)next);
-
-		return (count);
+		current = next;
 	}
 
-	return (0);
+	return (count);
 }
