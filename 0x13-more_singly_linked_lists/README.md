@@ -22,3 +22,7 @@
 
 ### 10. Delete at index
 
+### 11. Reverse list
+
+### 12. Print (safe version)
+
