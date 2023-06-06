@@ -25,5 +25,6 @@ size_t print_listint_safe(const listint_t *head)
 		}
 		current = next;
 	}
+	free((void *)head);
 	return (count);
 }
