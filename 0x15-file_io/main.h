@@ -6,6 +6,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <elf.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define BUFFERSIZE 1024
 
@@ -18,8 +20,8 @@ void class(unsigned char *e_ident);
 void data(unsigned char *e_ident);
 void version(unsigned char *e_ident);
 void osabi(unsigned char *e_ident);
-void type(unsigned int e_type);
-void entry(unsigned long int e_entry);
-void display_header(Elf64_Ehdr *header, unsigned char *e_ident);
+void type(unsigned int e_type, unsigned char *e_ident);
+void entry(unsigned long int e_entry, unsigned char *e_ident);
+void display_header(Elf64_Ehdr *header, unsigned char *elf_ident);
 
 #endif /* MAIN_H */
