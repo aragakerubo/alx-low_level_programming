@@ -2,36 +2,40 @@
 
 /**
  * magic - displays the magic number
- * @e_ident: ELF header identifier
+ * @elf_ident: ELF header identifier
  *
  * Description: displays the magic number
  *
  * Return: void
  */
-void magic(unsigned char *e_ident)
+void magic(unsigned char *elf_ident)
 {
 	int i;
 
 	printf("  Magic:   ");
 
 	for (i = 0; i < EI_NIDENT; i++)
-		printf("%02x ", e_ident[i]);
+	{
+		printf("%02x", elf_ident[i]);
+		if (i != EI_NIDENT - 1)
+			printf(" ");
+	}
 	printf("\n");
 }
 
 /**
  * class - displays the class
- * @e_ident: ELF header identifier
+ * @elf_ident: ELF header identifier
  *
  * Description: displays the class
  *
  * Return: void
  */
-void class(unsigned char *e_ident)
+void class(unsigned char *elf_ident)
 {
 	printf("  Class:                             ");
 
-	switch (e_ident[EI_CLASS])
+	switch (elf_ident[EI_CLASS])
 	{
 	case ELFCLASSNONE:
 		printf("none\n");
@@ -43,23 +47,23 @@ void class(unsigned char *e_ident)
 		printf("ELF64\n");
 		break;
 	default:
-		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
+		printf("<unknown: %x>\n", elf_ident[EI_CLASS]);
 	}
 }
 
 /**
  * data - displays the data
- * @e_ident: ELF header identifier
+ * @elf_ident: ELF header identifier
  *
  * Description: displays the data
  *
  * Return: void
  */
-void data(unsigned char *e_ident)
+void data(unsigned char *elf_ident)
 {
 	printf("  Data:                              ");
 
-	switch (e_ident[EI_DATA])
+	switch (elf_ident[EI_DATA])
 	{
 	case ELFDATANONE:
 		printf("none\n");
@@ -71,24 +75,24 @@ void data(unsigned char *e_ident)
 		printf("2's complement, big endian\n");
 		break;
 	default:
-		printf("<unknown: %x>\n", e_ident[EI_DATA]);
+		printf("<unknown: %x>\n", elf_ident[EI_DATA]);
 	}
 }
 
 /**
  * version - displays the version
- * @e_ident: ELF header identifier
+ * @elf_ident: ELF header identifier
  *
  * Description: displays the version
  *
  * Return: void
  */
-void version(unsigned char *e_ident)
+void version(unsigned char *elf_ident)
 {
 	printf("  Version:                           %d",
-	       e_ident[EI_VERSION]);
+	       elf_ident[EI_VERSION]);
 
-	switch (e_ident[EI_VERSION])
+	switch (elf_ident[EI_VERSION])
 	{
 	case EV_NONE:
 		printf(" (invalid)\n");
@@ -97,23 +101,23 @@ void version(unsigned char *e_ident)
 		printf(" (current)\n");
 		break;
 	default:
-		printf(" <unknown: %x>\n", e_ident[EI_VERSION]);
+		printf(" <unknown: %x>\n", elf_ident[EI_VERSION]);
 	}
 }
 
 /**
  * osabi - displays the OS/ABI
- * @e_ident: ELF header identifier
+ * @elf_ident: ELF header identifier
  *
  * Description: displays the OS/ABI
  *
  * Return: void
  */
-void osabi(unsigned char *e_ident)
+void osabi(unsigned char *elf_ident)
 {
 	printf("  OS/ABI:                            ");
 
-	switch (e_ident[EI_OSABI])
+	switch (elf_ident[EI_OSABI])
 	{
 	case ELFOSABI_NONE:
 		printf("UNIX - System V\n");
@@ -146,6 +150,6 @@ void osabi(unsigned char *e_ident)
 		printf("Standalone App\n");
 		break;
 	default:
-		printf("<unknown: %x>\n", e_ident[EI_OSABI]);
+		printf("<unknown: %x>\n", elf_ident[EI_OSABI]);
 	}
 }
