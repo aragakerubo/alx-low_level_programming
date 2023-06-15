@@ -221,13 +221,36 @@ void entry(unsigned long int e_entry, unsigned char *elf_ident)
 
 	if (elf_ident[EI_DATA] == ELFDATA2MSB)
 	{
-		e_entry = ((e_entry >> 24) & 0xff) | ((e_entry << 8) & 0xff0000) | ((e_entry >> 8) & 0xff00) | ((e_entry << 24) & 0xff000000);
+		e_entry = ((e_entry >> 24) & 0xff) |
+			((e_entry << 8) & 0xff0000) |
+			((e_entry >> 8) & 0xff00) |
+			((e_entry << 24) & 0xff000000);
 	}
 
 	if (elf_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)e_entry);
 	else
 		printf("%#lx\n", e_entry);
+}
+
+/**
+ * verify_elf - verifies if the file is an ELF
+ * @elf_ident: ELF header identifier
+ *
+ * Description: verifies if the file is an ELF
+ *
+ * Return: void
+ */
+void verify_elf(unsigned char *elf_ident)
+{
+	if (elf_ident[EI_MAG0] != 0x7f ||
+	    elf_ident[EI_MAG1] != 'E' ||
+	    elf_ident[EI_MAG2] != 'L' ||
+	    elf_ident[EI_MAG3] != 'F')
+	{
+		dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+		exit(98);
+	}
 }
 
 /**
@@ -269,11 +292,13 @@ void display_header(Elf64_Ehdr *header, unsigned char *elf_ident)
 }
 
 /**
- * main - displays the information contained in the ELF header at the start of an ELF file
+ * main - displays the information contained in the ELF header at
+ * the start of an ELF file
  * @argc: number of arguments
  * @argv: array of arguments
  *
- * Description: displays the information contained in the ELF header at the start of an ELF file
+ * Description: displays the information contained in the ELF header at
+ * the start of an ELF file
  *
  * Return: 0 on success
  */
@@ -285,45 +310,24 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n");
-		exit(98);
+		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n"), exit(98);
 	}
-
-	/* open file */
 	file_desc = open(argv[1], O_RDONLY);
 	if (file_desc == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: cannot read file %s\n", argv[1]);
 		exit(98);
 	}
-
-	/* read ELF header identifier */
 	read_bytes = read(file_desc, elf_ident, EI_NIDENT);
 	if (read_bytes == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: cannot read file %s\n", argv[1]);
 		exit(98);
 	}
-
-	/* verify ELF header identifier */
-	if (elf_ident[EI_MAG0] != 0x7f ||
-	    elf_ident[EI_MAG1] != 'E' ||
-	    elf_ident[EI_MAG2] != 'L' ||
-	    elf_ident[EI_MAG3] != 'F')
-	{
-		dprintf(STDERR_FILENO, "Error: file is not ELF\n");
-		exit(98);
-	}
-
-	/* allocate memory for header struct */
+	verify_elf(elf_ident);
 	header = malloc(sizeof(Elf64_Ehdr));
 	if (header == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: memory allocation failed\n");
-		exit(98);
-	}
-
-	/* read ELF header */
+		dprintf(STDERR_FILENO, "Error: memory allocation failed\n"), exit(98);
 	lseek(file_desc, 0, SEEK_SET);
 	read_bytes = read(file_desc, header, sizeof(Elf64_Ehdr));
 	if (read_bytes == -1)
@@ -331,19 +335,14 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: cannot read file %s\n", argv[1]);
 		exit(98);
 	}
-	/* display ELF header */
 	display_header(header, elf_ident);
-
 	free(header);
-
 	file_desc = close(file_desc);
-
 	if (file_desc == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: cannot close fd %d\n", file_desc);
 		exit(98);
 	}
-
 	return (0);
 }
 

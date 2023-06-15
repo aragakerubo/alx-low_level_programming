@@ -22,6 +22,7 @@ void version(unsigned char *e_ident);
 void osabi(unsigned char *e_ident);
 void type(unsigned int e_type, unsigned char *e_ident);
 void entry(unsigned long int e_entry, unsigned char *e_ident);
+void verify_elf(unsigned char *elf_ident);
 void display_header(Elf64_Ehdr *header, unsigned char *elf_ident);
 
 #endif /* MAIN_H */
