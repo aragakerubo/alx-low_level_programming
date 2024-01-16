@@ -4,31 +4,44 @@
 #include "lists.h"
 
 /**
- * main - generates keygen for crackme5
+ * main - generates passwords for crackme5 executable
  * @argc: number of arguments
- * @argv: array of arguments
+ * @argv: array of pointers to arguments
  *
- * Return: 0 on success, 1 on failure
+ * Return: always 0
  */
 int main(int argc, char *argv[])
 {
-	char *username;
-	char *key;
-	int i, len, sum;
+	char *password;
+	int len, i, sum, prod, last;
 
 	if (argc != 2)
 	{
 		printf("Usage: %s username\n", argv[0]);
-		return (1);
+		exit(1);
 	}
-	username = argv[1];
-	len = strlen(username);
-	key = malloc(len + 1);
-	if (key == NULL)
-		return (1);
-	for (i = 0, sum = 0; i < len; i++)
-		sum += username[i];
-	key[i] = '\0';
-	printf("%s\n", key);
+	len = strlen(argv[1]);
+	password = malloc(len + 1);
+	if (password == NULL)
+	{
+		printf("Malloc failed\n");
+		exit(1);
+	}
+	for (i = 0, sum = 0, prod = 1; i < len; i++)
+	{
+		sum += argv[1][i];
+		prod *= argv[1][i];
+	}
+	last = argv[1][len - 1];
+	password[0] = last;
+	password[1] = sum & 0x3f;
+	password[2] = (sum ^ 0x4f) & 0x3f;
+	password[3] = prod & 0x3f;
+	password[4] = (prod ^ 0xef) & 0x3f;
+	password[5] = '\0';
+	for (i = 0; i < len; i++)
+		password[i] = (password[i] & 0x3f) + 0x3f;
+	printf("%s\n", password);
+	free(password);
 	return (0);
 }
