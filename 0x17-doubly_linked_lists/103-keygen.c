@@ -17,14 +17,40 @@ int main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (1);
-	strcpy(password, argv[1]);
-	codex = strdup("A-CHRDw87lNS0E9B2T6Y4GzXsQV1g5W3FJZqKpUjLcMnOoIybtvfxePmkuariCdh");
+	codex = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
+
+	tmp = (len ^ 59) & 63;
+	password[0] = codex[tmp];
+
+	tmp = 0;
+	for (i = 0; i < len; i++)
+		tmp += argv[1][i];
+	password[1] = codex[(tmp ^ 79) & 63];
+
+	tmp = 1;
+	for (i = 0; i < len; i++)
+		tmp *= argv[1][i];
+	password[2] = codex[(tmp ^ 85) & 63];
+
+	tmp = 0;
 	for (i = 0; i < len; i++)
 	{
-		tmp = password[i];
-		password[i] = codex[(tmp ^ 0x3b) & 0x3f];
+		if (argv[1][i] > tmp)
+			tmp = argv[1][i];
 	}
-	password[i] = codex[(password[0] ^ 0x4f) & 0x3f];
-	printf("%s\n", password);
+	srand(tmp ^ 14);
+	password[3] = codex[rand() & 63];
+
+	tmp = 0;
+	for (i = 0; i < len; i++)
+		tmp += (argv[1][i] * argv[1][i]);
+	password[4] = codex[(tmp ^ 239) & 63];
+
+	for (i = 0; i < argv[1][0]; i++)
+		tmp = rand();
+	password[5] = codex[(tmp ^ 229) & 63];
+
+	password[6] = '\0';
+	printf("%s", password);
 	return (0);
 }
