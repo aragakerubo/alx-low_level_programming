@@ -12,36 +12,19 @@
  */
 int main(int argc, char *argv[])
 {
-	char *password;
-	int len, i, sum, prod, last;
+	char password[7], *codex;
+	int len = strlen(argv[1]), i, tmp;
 
 	if (argc != 2)
-	{
-		printf("Usage: %s username\n", argv[0]);
-		exit(1);
-	}
-	len = strlen(argv[1]);
-	password = malloc(len + 1);
-	if (password == NULL)
-	{
-		printf("Malloc failed\n");
-		exit(1);
-	}
-	for (i = 0, sum = 0, prod = 1; i < len; i++)
-	{
-		sum += argv[1][i];
-		prod *= argv[1][i];
-	}
-	last = argv[1][len - 1];
-	password[0] = last;
-	password[1] = sum & 0x3f;
-	password[2] = (sum ^ 0x4f) & 0x3f;
-	password[3] = prod & 0x3f;
-	password[4] = (prod ^ 0xef) & 0x3f;
-	password[5] = '\0';
+		return (1);
+	strcpy(password, argv[1]);
+	codex = strdup("A-CHRDw87lNS0E9B2T6Y4GzXsQV1g5W3FJZqKpUjLcMnOoIybtvfxePmkuariCdh");
 	for (i = 0; i < len; i++)
-		password[i] = (password[i] & 0x3f) + 0x3f;
+	{
+		tmp = password[i];
+		password[i] = codex[(tmp ^ 0x3b) & 0x3f];
+	}
+	password[i] = codex[(password[0] ^ 0x4f) & 0x3f];
 	printf("%s\n", password);
-	free(password);
 	return (0);
 }
