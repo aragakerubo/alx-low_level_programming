@@ -1,7 +1,19 @@
 #!/usr/bin/python3
+"""
+Function that returns the perimeter of the island described in grid
+"""
 
 
 def island_perimeter(grid):
+    """
+    Function that returns the perimeter of the island described in grid
+
+    Arguments:
+    - grid: a list of list of integers
+
+    Returns:
+    - (int): The perimeter of the island described in grid
+    """
     perimeter = 0
     for i in range(len(grid)):
         for j in range(len(grid[i])):
