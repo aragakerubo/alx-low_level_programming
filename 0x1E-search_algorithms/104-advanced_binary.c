@@ -27,7 +27,10 @@ int advanced_binary_recursive(int *array, size_t start, size_t end, int value)
 		if (mid == start || array[mid - 1] != value)
 			return mid;
 		else
-			return advanced_binary_recursive(array, start, mid - 1, value);
+		{
+			return advanced_binary_recursive(array, start,
+							 mid - 1, value);
+		}
 	}
 	else if (array[mid] < value)
 		return advanced_binary_recursive(array, mid + 1, end, value);
