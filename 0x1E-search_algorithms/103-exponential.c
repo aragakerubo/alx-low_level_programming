@@ -11,12 +11,9 @@
  */
 int exponential_search(int *array, size_t size, int value)
 {
-	size_t bound, i;
+	size_t bound, i, mid;
 
-	if (array == NULL)
-		return (-1);
-
-	if (size == 0)
+	if (array == NULL || size == 0)
 		return (-1);
 
 	bound = 1;
@@ -36,6 +33,19 @@ int exponential_search(int *array, size_t size, int value)
 		printf("Value checked array[%lu] = [%d]\n", i, array[i]);
 		if (array[i] == value)
 			return (i);
+	}
+	for (mid = (bound + bound / 2) / 2; mid < bound; mid++)
+	{
+		printf("Searching in array: ");
+		for (i = mid; i < bound; i++)
+		{
+			printf("%d", array[i]);
+			if (i < bound - 1)
+				printf(", ");
+		}
+		printf("\n");
+		if (array[mid] == value)
+			return (mid);
 	}
 	return (-1);
 }
