@@ -11,11 +11,12 @@
  */
 int exponential_search(int *array, size_t size, int value)
 {
-	size_t bound = 1, left, right;
+	size_t bound, left, right;
 
 	if (array == NULL || size == 0)
 		return (-1);
 
+	bound = 1;
 	while (bound < size && array[bound] < value)
 	{
 		printf("Value checked array[%lu] = [%d]\n",
