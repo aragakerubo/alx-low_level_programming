@@ -6,7 +6,8 @@
  * @array: pointer to the first element of the array to search in
  * @size: number of elements in array
  * @value: value to search for
- * Return: the first index where value is located or -1 if value is not present
+ * Return: the first index where value is located or -1 if value
+ * is not present
  */
 int exponential_search(int *array, size_t size, int value)
 {
@@ -24,7 +25,8 @@ int exponential_search(int *array, size_t size, int value)
 
 	left = bound / 2;
 	right = (bound < size) ? bound : size - 1;
-	printf("Value found between indexes [%lu] and [%lu]\n", left, right);
+	printf("Value found between indexes [%lu] and [%lu]\n",
+	       left, right);
 
 	while (left <= right)
 	{
